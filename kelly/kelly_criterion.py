@@ -58,7 +58,7 @@ def main():
 		elif op in ("-w", "--win"):
 			rw = float(value)
 		else:
-			print "invalid arguments"
+			print("invalid arguments")
 			sys.exit(INVALID_ARGS)
 	# p = 0.5
 	# rl = 1#lost rate
@@ -77,6 +77,6 @@ def main():
 	print(put)
 	# print(profit)
 	# print(total)
-
-if __name__ == '__main__':
-	main()
+#
+# if __name__ == '__main__':
+# 	main()
