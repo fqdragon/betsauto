@@ -6,6 +6,7 @@ class ChromeDriver(WebDriver):
 
     def __init__(self, user=None, pwd=None):
         self.executable_path = r'E:\Develop\spider\software\chromedriver.exe'
+        self.options = WebDriver.create_options(self)
         self.options.set_headless()
         try:
             WebDriver.__init__(
