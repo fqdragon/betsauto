@@ -22,7 +22,7 @@ class ChromeDriver(WebDriver):
 
 # options = webdriver.FirefoxOptions()
 # options.set_headless()
-# options.add_argument(‘-headless‘)
+# options.add_argument('-headless')
 # options.add_argument('--disable-gpu')
 # firefoxProfile = webdriver.FirefoxProfile()
 ## Disable CSS

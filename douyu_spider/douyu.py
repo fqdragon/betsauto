@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from douyu_spider.chromedriver import ChromeDriver
+from chromedriver import ChromeDriver
 
 
 # def loginDouyu(driver, url):
@@ -28,7 +28,7 @@ def getBetroom(driver, url):
     try:
         driver.get(url)#访问页面
         driver.implicitly_wait(3)#等待一定时间，让js脚本加载完毕
-        rooms = driver.find_element_by_xpath('//div/ul[@id="live-list-contentbox"]/li')
+        rooms = driver.find_element_by_xpath('//div/ul[@id="live-list-contentbox"]/li/text()')
         print(rooms)
         for room in rooms:
             if driver.find_element_by_xpath('./a/span/i[@class="icon_quiz"]'):
