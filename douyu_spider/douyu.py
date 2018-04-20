@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from chromedriver import ChromeDriver
+from douyu_spider.chromedriver import ChromeDriver
 
 
 # def loginDouyu(driver, url):
@@ -24,20 +24,32 @@ from chromedriver import ChromeDriver
 #     except Exception:
 #         print("loginDouyu")
 
+def goBet(driver, href):
+    try:
+        driver.get(href)
+        driver.implicitly_wait(3)
+
+    except Exception as e:
+        print("goBet:", e)
+
+
+
 def getBetroom(driver, url):
     try:
         driver.get(url)#访问页面
         driver.implicitly_wait(3)#等待一定时间，让js脚本加载完毕
-        rooms = driver.find_element_by_xpath('//div/ul[@id="live-list-contentbox"]/li/text()')
-        print(rooms)
+        rooms = driver.find_elements_by_xpath('//div/ul[@id="live-list-contentbox"]/li')
         for room in rooms:
-            if driver.find_element_by_xpath('./a/span/i[@class="icon_quiz"]'):
-                href = driver.find_element_by_xpath('./a/@href')
-                print(href)
+            try:#如果没开竞猜，会出现找不到元素的异常
+                if room.find_element_by_xpath('a/span/i[@class="icon_quiz"]'):
+                    href = room.find_element_by_xpath('a').get_attribute("href")
+                    print(href)
+            except Exception:
+                pass
         #竞猜：//div/ul[@id='live-list-contentbox']/li/a/span/i[@class='icon_quiz']
         #房间号
-    except Exception:
-        print("getBetroomm")
+    except Exception as e:
+        print("getBetroomm:", e)
         driver.quit()
 
 
@@ -46,5 +58,5 @@ if __name__ == '__main__':
         url = "https://www.douyu.com/directory/game/DOTA2"
         myDriver = ChromeDriver()
         getBetroom(myDriver, url)
-    except Exception:
-        print("main():")
+    except Exception as e:
+        print("main():", e)
