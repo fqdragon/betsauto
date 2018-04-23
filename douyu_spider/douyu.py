@@ -24,13 +24,22 @@ from douyu_spider.chromedriver import ChromeDriver
 #     except Exception:
 #         print("loginDouyu")
 
-def goBet(driver, href):
+def goBet(href):
     try:
-        driver.get(href)
-        driver.implicitly_wait(3)
+        roomDriver = ChromeDriver()
+        roomDriver.get(href)
+        roomDriver.implicitly_wait(3)
+        betBtn = roomDriver.find_element_by_xpath('//div[contains(@class,"guess-game-btn")]')
+        betBtn.click()
+        bets = roomDriver.find_elements_by_xpath('//div[contains(@class,"guess-game-box")]')
+        for bet in bets:
+            print(bet.text)
+        roomDriver.quit()
 
     except Exception as e:
         print("goBet:", e)
+        if roomDriver:
+            roomDriver.quit()
 
 
 
@@ -43,7 +52,7 @@ def getBetroom(driver, url):
             try:#如果没开竞猜，会出现找不到元素的异常
                 if room.find_element_by_xpath('a/span/i[@class="icon_quiz"]'):
                     href = room.find_element_by_xpath('a').get_attribute("href")
-                    print(href)
+                    goBet(href)
             except Exception:
                 pass
         #竞猜：//div/ul[@id='live-list-contentbox']/li/a/span/i[@class='icon_quiz']
@@ -58,5 +67,7 @@ if __name__ == '__main__':
         url = "https://www.douyu.com/directory/game/DOTA2"
         myDriver = ChromeDriver()
         getBetroom(myDriver, url)
+        myDriver.quit()
     except Exception as e:
         print("main():", e)
+        myDriver.quit()
