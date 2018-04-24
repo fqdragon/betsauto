@@ -7,7 +7,9 @@ class ChromeDriver(WebDriver):
     def __init__(self, user=None, pwd=None):
         self.executable_path = r'E:\Develop\spider\software\chromedriver.exe'
         self.options = WebDriver.create_options(self)
-        self.options.set_headless()
+        #self.options.set_headless()
+        extension_path = '/extension/path'
+        self.options.add_extension(extension_path)
         try:
             WebDriver.__init__(
                 self,
