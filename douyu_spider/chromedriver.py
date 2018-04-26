@@ -7,9 +7,10 @@ class ChromeDriver(WebDriver):
     def __init__(self, user=None, pwd=None):
         self.executable_path = r'E:\Develop\spider\software\chromedriver.exe'
         self.options = WebDriver.create_options(self)
-        #self.options.set_headless()
-        extension_path = '/extension/path'
-        self.options.add_extension(extension_path)
+        self.options.add_argument(r"user-data-dir=C:\Users\Administrator.XSOOY-20170317P\AppData\Local\Google\Chrome\User Data")
+        # self.options.set_headless()
+        # extension_path = '/extension/path'
+        # self.options.add_extension(extension_path)
         try:
             WebDriver.__init__(
                 self,
